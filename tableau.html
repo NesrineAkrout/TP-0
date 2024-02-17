@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="sty.css">
+</head>
+<body>
+    <form method="post" class="form-container">
+        <div class="inputs-container">
+          <input type="text" name="champ1" placeholder="Dimension du tableau" id="dim_tab">
+          <input type="text" name="champ2" placeholder="La valeur minimale" id="borne_inf">
+          <input type="text" name="champ3" placeholder="La valeur maximale" id="borne_sup">
+          
+        </div>
+        <div class="button-container">
+          <input type="button" value="Générer un Tableau" class="submit-button" onclick="Afficher()">
+        </div>
+      </form>
+      <div class="" id="afficherTableau"> </div>
+      <script>
+        function Afficher() {
+        document.getElementById("afficherTableau").innerHTML="";             
+        document.getElementById("afficherTableau").innerHTML=RemplirTableau();
+          }
+      function randomInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+      function RemplirTableau(){
+        var dim_tab=document.getElementById("dim_tab").value;
+        var borne_inf=document.getElementById("borne_inf").value;
+        var borne_sup=document.getElementById("borne_sup").value;
+        var res="";
+        if(isNaN(dim_tab) == true || isNaN(borne_inf)==true || isNaN(borne_sup)==true
+        || dim_tab == '' ||  borne_inf=='' || borne_sup==''|| parseInt(borne_inf)>=parseInt(borne_sup))
+        {
+          
+         
+          res="<h1>Une faute...</h1>";
+        }
+        else{
+               res="<table border=5><tr>";
+               var largeur=0;
+               for(var i=0;i<dim_tab;i++)
+              {
+                      if ( largeur<9)
+                       {
+                            res+= "<td>"+randomInteger(parseInt(borne_inf),  parseInt(borne_sup))+"</td>";
+                            largeur+=1;
+                      }
+                      else{
+                          res+= "<td>"+randomInteger(parseInt(borne_inf),  parseInt(borne_sup))+"</td></tr><tr>";
+                          largeur=0;
+                     } 
+                }         
+                res+= "</tr></table>";   
+        }
+         return res;
+        }
+       
+
+
+
+      
+      </script>
+</body>
+</html>
